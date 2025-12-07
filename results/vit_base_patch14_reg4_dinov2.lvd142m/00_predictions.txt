@@ -1,0 +1,5 @@
+	243 : bull mastiff   		value = 6.962	 prob = 41.7%
+	242 : boxer          		value = 5.190	 prob = 7.1%
+	254 : pug, pug-dog   		value = 3.868	 prob = 1.9%
+	245 : French bulldog 		value = 3.265	 prob = 1.0%
+	260 : chow, chow chow		value = 3.250	 prob = 1.0%

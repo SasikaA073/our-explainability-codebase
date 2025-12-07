@@ -29,6 +29,7 @@ from imagenet_labels import CLS2IDX
 import sys
 sys.path.append("../transformer-explainability-chefer-implementation")
 from baselines.ViT.ViT_LRP import vit_base_patch16_224 as vit_LRP
+from baselines.ViT.ViT_LRP import vit_base_patch14_reg4_dinov2
 from baselines.ViT.ViT_LRP import compute_rollout_attention as compute_rollout_attention_chefer
 
 # Set seed for reproducibility
@@ -44,7 +45,24 @@ device = "cpu"
 
 results_dir = "results"
 # model_id = "vit_base_patch14_reg4_dinov2.lvd142m"
-model_id = "vit_base_patch16_224.augreg2_in21k_ft_in1k"
+# model_id = "vit_base_patch16_224.augreg2_in21k_ft_in1k"
+
+# model_id = "vit_large_patch14_224"
+# model_id = "vit_large_patch16_rope_224"
+# model_id = "vit_huge_patch16_224"
+
+model_id = "deit3_small_patch16_224.fb_in22k_ft_in1k"
+model_id_list = [
+    "deit3_small_patch16_224.fb_in22k_ft_in1k",
+    "deit3_base_patch16_224.fb_in22k_ft_in1k",
+    "deit3_medium_patch16_224.fb_in22k_ft_in1k",
+    "deit3_large_patch16_224.fb_in22k_ft_in1k",
+
+    "deit3_large_patch16_384.fb_in22k_ft_in1k", # to compare image resolution
+    "deit3_small_patch16_384.fb_in22k_ft_in1k",
+    "deit3_base_patch16_384.fb_in22k_ft_in1k"
+
+]
 
 results_dir = f"{results_dir}/{model_id}"
 os.makedirs(results_dir, exist_ok=True)
@@ -149,6 +167,8 @@ if model_id == "vit_base_patch14_reg4_dinov2.lvd142m":
     # Load the trained weights
     checkpoint_dir = f"checkpoints/{model_id}_finetuned_best.pth"
     model.load_state_dict(torch.load(checkpoint_dir, map_location='cpu'))
+
+    print(f"Classification head for {model_id} loaded successfully")
 
 # Move to device and set to eval mode
 
@@ -393,7 +413,7 @@ def sanity_check(x, predictions, categories=None, normalized=True):
         output_string += line
 
     # Save the predictions
-    with open("1_predictions.txt", "w") as f:
+    with open(f"{results_dir}/00_predictions.txt", "w") as f:
         f.write(output_string)
 
     print("\n=== VISUALIZATION ===")
@@ -788,7 +808,7 @@ def visualize_attention_grid(x, attention_maps_od, normalized=True, alpha=0.6, c
     img = x_img.permute(1, 2, 0).clamp(0, 1).cpu().numpy()
 
     num_layers = len(attention_maps_od)
-    fig, axes = plt.subplots(2, num_layers, figsize=(4*num_layers, 8))
+    fig, axes = plt.subplots(3, num_layers, figsize=(4*num_layers, 12))
 
     if num_layers == 1:
         axes = axes[:, None]  # ensure axes is 2D
@@ -800,6 +820,9 @@ def visualize_attention_grid(x, attention_maps_od, normalized=True, alpha=0.6, c
 
         # Average over heads
         row_id = 0 # only choose the first row;because that is where CLS attendance happens
+        
+        # Full attention row for graph (CLS -> All)
+        attn_row_full = attn_tensor.squeeze(0).mean(dim=0)[row_id, :].cpu().numpy()
 
         attn_slice = attn_tensor.squeeze(0).mean(dim=0)[row_id, 1+NUMBER_OF_REGISTERS:]  # remove CLS token + REGISTER_TOKENS
 
@@ -824,11 +847,43 @@ def visualize_attention_grid(x, attention_maps_od, normalized=True, alpha=0.6, c
         axes[0, col].set_title(f'{layer_name} Heatmap', fontsize=10)
         plt.colorbar(im, ax=axes[0, col], fraction=0.046)
 
-        # Bottom row: overlay
+        # Middle row: overlay
         axes[1, col].imshow(img)
         axes[1, col].imshow(attn_resized, cmap=cmap, alpha=alpha)
         axes[1, col].axis('on')
         axes[1, col].set_title(f'{layer_name} Overlay', fontsize=10)
+        
+        # Bottom row: Attention Graph
+        ax_graph = axes[2, col]
+        
+        # Indices
+        cls_idx = [0]
+        reg_indices = list(range(1, 1 + NUMBER_OF_REGISTERS))
+        patch_indices = list(range(1 + NUMBER_OF_REGISTERS, len(attn_row_full)))
+        
+        # Plot Patches
+        ax_graph.plot(patch_indices, attn_row_full[patch_indices], label='Patches', color='blue', alpha=0.6, linewidth=0.5)
+        
+        # Plot Registers
+        if reg_indices:
+            ax_graph.scatter(reg_indices, attn_row_full[reg_indices], label='Registers', color='red', s=20, zorder=5)
+            
+        # Plot CLS
+        ax_graph.scatter(cls_idx, attn_row_full[cls_idx], label='CLS', color='green', s=30, marker='*', zorder=10)
+        
+        # Separator lines
+        if reg_indices:
+            ax_graph.axvline(x=0.5, color='gray', linestyle='--', linewidth=0.5) # Sep CLS and Reg
+            ax_graph.axvline(x=reg_indices[-1] + 0.5, color='gray', linestyle='--', linewidth=0.5) # Sep Reg and Patches
+        else:
+            ax_graph.axvline(x=0.5, color='gray', linestyle='--', linewidth=0.5) # Sep CLS and Patches
+            
+        ax_graph.set_title(f'{layer_name} Raw Attn', fontsize=10)
+        if col == 0:
+            ax_graph.set_ylabel('Attention Weight')
+            ax_graph.legend(fontsize=8)
+        ax_graph.set_xlabel('Token Index')
+        ax_graph.grid(True, alpha=0.3)
 
     fig.suptitle(f"{model.model_id}; [CLS] Token Attendance", fontsize=16)
     plt.tight_layout(rect=[0, 0, 1, 0.97])  # adjust so title doesn't overlap
@@ -886,19 +941,46 @@ visualize_attention_overlay_simple(x, rollout_grid, alpha=0.6, interpolation='bi
 
 ## TODO: CheferCAM (Transformer Atribution/Grad) Explainability Map (I want to show this one)
 
+
+
+# ... (existing code)
+
 print("Initializing LRP model...")
-model_lrp = vit_LRP(pretrained=False).to(device)
+if model_id == "vit_base_patch14_reg4_dinov2.lvd142m":
+    model_lrp = vit_base_patch14_reg4_dinov2(pretrained=False, img_size=518).to(device)
+else:
+    model_lrp = vit_LRP(pretrained=False).to(device)
 model_lrp.eval()
 
 # Transfer weights from timm model to LRP model
 print("Transferring weights...")
 timm_state_dict = model.state_dict()
+    
 lrp_state_dict = model_lrp.state_dict()
+if 'pos_embed' in lrp_state_dict:
+    print(f"lrp pos_embed shape: {lrp_state_dict['pos_embed'].shape}")
 
 new_state_dict = {}
 for key in lrp_state_dict.keys():
     if key in timm_state_dict:
-        new_state_dict[key] = timm_state_dict[key]
+        if key == 'pos_embed' and lrp_state_dict[key].shape != timm_state_dict[key].shape:
+            print(f"Handling pos_embed mismatch: {lrp_state_dict[key].shape} vs {timm_state_dict[key].shape}")
+            # Assuming timm pos_embed is just patches (1369) and lrp is CLS+REG+Patches (1374)
+            # We copy timm patches to lrp patches
+            # lrp pos_embed: [1, 1+num_reg+num_patches, 768]
+            # timm pos_embed: [1, num_patches, 768]
+            
+            # Initialize with zeros for CLS and REG tokens (since timm doesn't seem to use pos_embed for them)
+            # and copy patches from timm
+            new_pos_embed = torch.zeros_like(lrp_state_dict[key])
+            
+            # Copy patches (last 1369 elements)
+            # indices: 0=CLS, 1..4=REG, 5..=PATCHES
+            num_extra_tokens = 1 + (4 if model_id == "vit_base_patch14_reg4_dinov2.lvd142m" else 0)
+            new_pos_embed[:, num_extra_tokens:, :] = timm_state_dict[key]
+            new_state_dict[key] = new_pos_embed
+        else:
+            new_state_dict[key] = timm_state_dict[key]
     else:
         # Handle potential naming mismatches if any
         # For example, timm might use 'head.weight' and LRP might use 'head.weight' (same)
@@ -920,9 +1002,9 @@ model_lrp.zero_grad()
 
 # You can change the target class here. 
 # By default, we use the predicted class, but you can set it to any class index (0-999).
-# TARGET_CLASS = prediction # default
+TARGET_CLASS = prediction # default
 
-TARGET_CLASS = 282 
+# TARGET_CLASS = 282 
 # TARGET_CLASS = 285 # Example: Force explanation for 'Egyptian cat'
 
 # We need to backpropagate the score of the target class
