@@ -1,0 +1,206 @@
+Registers found: torch.Size([1, 4, 768])
+cls_token torch.Size([1, 1, 768])
+reg_token torch.Size([1, 4, 768])
+reg_token torch.Size([1, 4, 768])
+HAS_REGISTERS=True
+NUMBER_OF_REGISTERS=4
+block_0
+	q shape torch.Size([1, 12, 1374, 64])
+	k shape torch.Size([1, 12, 1374, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 1374, 1374])
+	Attention Map shape after softmax torch.Size([1, 12, 1374, 1374])
+block_1
+	q shape torch.Size([1, 12, 1374, 64])
+	k shape torch.Size([1, 12, 1374, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 1374, 1374])
+	Attention Map shape after softmax torch.Size([1, 12, 1374, 1374])
+block_2
+	q shape torch.Size([1, 12, 1374, 64])
+	k shape torch.Size([1, 12, 1374, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 1374, 1374])
+	Attention Map shape after softmax torch.Size([1, 12, 1374, 1374])
+block_3
+	q shape torch.Size([1, 12, 1374, 64])
+	k shape torch.Size([1, 12, 1374, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 1374, 1374])
+	Attention Map shape after softmax torch.Size([1, 12, 1374, 1374])
+block_4
+	q shape torch.Size([1, 12, 1374, 64])
+	k shape torch.Size([1, 12, 1374, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 1374, 1374])
+	Attention Map shape after softmax torch.Size([1, 12, 1374, 1374])
+block_5
+	q shape torch.Size([1, 12, 1374, 64])
+	k shape torch.Size([1, 12, 1374, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 1374, 1374])
+	Attention Map shape after softmax torch.Size([1, 12, 1374, 1374])
+block_6
+	q shape torch.Size([1, 12, 1374, 64])
+	k shape torch.Size([1, 12, 1374, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 1374, 1374])
+	Attention Map shape after softmax torch.Size([1, 12, 1374, 1374])
+block_7
+	q shape torch.Size([1, 12, 1374, 64])
+	k shape torch.Size([1, 12, 1374, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 1374, 1374])
+	Attention Map shape after softmax torch.Size([1, 12, 1374, 1374])
+block_8
+	q shape torch.Size([1, 12, 1374, 64])
+	k shape torch.Size([1, 12, 1374, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 1374, 1374])
+	Attention Map shape after softmax torch.Size([1, 12, 1374, 1374])
+block_9
+	q shape torch.Size([1, 12, 1374, 64])
+	k shape torch.Size([1, 12, 1374, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 1374, 1374])
+	Attention Map shape after softmax torch.Size([1, 12, 1374, 1374])
+block_10
+	q shape torch.Size([1, 12, 1374, 64])
+	k shape torch.Size([1, 12, 1374, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 1374, 1374])
+	Attention Map shape after softmax torch.Size([1, 12, 1374, 1374])
+block_11
+	q shape torch.Size([1, 12, 1374, 64])
+	k shape torch.Size([1, 12, 1374, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 1374, 1374])
+	Attention Map shape after softmax torch.Size([1, 12, 1374, 1374])
+Top 5 classes:
+	239 : Bernese mountain dog          		value = 4.831	 prob = 7.6%
+	264 : Cardigan, Cardigan Welsh corgi		value = 4.199	 prob = 4.1%
+	282 : tiger cat                     		value = 3.781	 prob = 2.7%
+	231 : collie                        		value = 3.429	 prob = 1.9%
+	240 : Appenzeller                   		value = 3.253	 prob = 1.6%
+=== INPUT CHECK ===
+shape: torch.Size([1, 3, 518, 518])
+dtype: torch.float32
+min / max / mean: -2.1007792949676514 2.6051416397094727 -0.29586076736450195
+contains NaNs: False
+
+=== MODEL PREDICTIONS CHECK ===
+predictions shape: torch.Size([1, 1000])
+predictions contains NaNs: False
+softmax sum: 1.0
+
+=== TOP-5 PREDICTIONS ===
+Top 5 classes:
+	239 : Bernese mountain dog          		value = 4.831	 prob = 7.6%
+	264 : Cardigan, Cardigan Welsh corgi		value = 4.199	 prob = 4.1%
+	282 : tiger cat                     		value = 3.781	 prob = 2.7%
+	231 : collie                        		value = 3.429	 prob = 1.9%
+	240 : Appenzeller                   		value = 3.253	 prob = 1.6%
+
+=== VISUALIZATION ===
+Input shape: torch.Size([1, 3, 518, 518])
+
+block_0:
+  Mean: -0.0003
+  Std:  0.0072
+  Min:  -0.0431
+  Max:  0.0296
+  Range: 0.0727
+
+block_1:
+  Mean: -0.0000
+  Std:  0.0072
+  Min:  -0.0421
+  Max:  0.0301
+  Range: 0.0722
+
+block_2:
+  Mean: -0.0007
+  Std:  0.0073
+  Min:  -0.0457
+  Max:  0.0287
+  Range: 0.0744
+
+block_3:
+  Mean: 0.0005
+  Std:  0.0076
+  Min:  -0.0413
+  Max:  0.0333
+  Range: 0.0746
+
+block_4:
+  Mean: -0.0018
+  Std:  0.0080
+  Min:  -0.0388
+  Max:  0.0322
+  Range: 0.0710
+
+block_5:
+  Mean: -0.0066
+  Std:  0.0082
+  Min:  -0.0430
+  Max:  0.0308
+  Range: 0.0738
+
+block_6:
+  Mean: -0.0111
+  Std:  0.0103
+  Min:  -0.0462
+  Max:  0.0423
+  Range: 0.0885
+
+block_7:
+  Mean: -0.0227
+  Std:  0.0133
+  Min:  -0.0771
+  Max:  0.0337
+  Range: 0.1107
+
+block_8:
+  Mean: -0.0286
+  Std:  0.0213
+  Min:  -0.1047
+  Max:  0.0428
+  Range: 0.1475
+
+block_9:
+  Mean: -0.0472
+  Std:  0.0382
+  Min:  -0.1674
+  Max:  0.0789
+  Range: 0.2463
+
+block_10:
+  Mean: -0.1257
+  Std:  0.0655
+  Min:  -0.3500
+  Max:  0.0815
+  Range: 0.4314
+
+block_11:
+  Mean: -0.3315
+  Std:  0.0845
+  Min:  -0.5628
+  Max:  -0.0009
+  Range: 0.5619
+block_0 torch.Size([1, 12, 1374, 1374])
+block_1 torch.Size([1, 12, 1374, 1374])
+block_2 torch.Size([1, 12, 1374, 1374])
+block_3 torch.Size([1, 12, 1374, 1374])
+block_4 torch.Size([1, 12, 1374, 1374])
+block_5 torch.Size([1, 12, 1374, 1374])
+block_6 torch.Size([1, 12, 1374, 1374])
+block_7 torch.Size([1, 12, 1374, 1374])
+block_8 torch.Size([1, 12, 1374, 1374])
+block_9 torch.Size([1, 12, 1374, 1374])
+block_10 torch.Size([1, 12, 1374, 1374])
+block_11 torch.Size([1, 12, 1374, 1374])
+Attention shape: torch.Size([37, 37])
+Min: 0.0007
+Max: 0.0007
+Mean: 0.0007
+Sum: 1.0000
+torch.Size([1, 1, 37, 37])
+torch.Size([1, 1, 37, 37])
+torch.Size([1, 1, 37, 37])
+torch.Size([1, 1, 37, 37])
+torch.Size([1, 1, 37, 37])
+torch.Size([1, 1, 37, 37])
+torch.Size([1, 1, 37, 37])
+torch.Size([1, 1, 37, 37])
+torch.Size([1, 1, 37, 37])
+torch.Size([1, 1, 37, 37])
+torch.Size([1, 1, 37, 37])
+torch.Size([1, 1, 37, 37])
