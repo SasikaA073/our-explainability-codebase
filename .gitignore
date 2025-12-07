@@ -1,4 +1,4 @@
 checkpoints/*
 .config
-results/*
+# results/*
 __pycache__
