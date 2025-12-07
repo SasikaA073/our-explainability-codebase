@@ -1,0 +1,26 @@
+length of the dataset 5
+length of the dataloader 5
+batch size 1
+number of samples 5
+Evaluating vit-base with transformer_attribution method
+Using 5 samples
+Using imagenet/segmentation/gtsegs_ijcv.mat as the dataset
+  0%|          | 0/5 [00:00<?, ?it/s]pixAcc: 0.8753, mIoU: 0.7672, mAP: 0.8231, mF1: 0.4305:   0%|          | 0/5 [00:01<?, ?it/s]pixAcc: 0.8753, mIoU: 0.7672, mAP: 0.8231, mF1: 0.4305:  20%|██        | 1/5 [00:01<00:04,  1.07s/it]pixAcc: 0.8053, mIoU: 0.6622, mAP: 0.7684, mF1: 0.5166:  20%|██        | 1/5 [00:01<00:04,  1.07s/it]pixAcc: 0.8053, mIoU: 0.6622, mAP: 0.7684, mF1: 0.5166:  40%|████      | 2/5 [00:01<00:02,  1.49it/s]pixAcc: 0.8385, mIoU: 0.7066, mAP: 0.8036, mF1: 0.5767:  40%|████      | 2/5 [00:01<00:02,  1.49it/s]pixAcc: 0.8385, mIoU: 0.7066, mAP: 0.8036, mF1: 0.5767:  60%|██████    | 3/5 [00:01<00:01,  1.85it/s]pixAcc: 0.7844, mIoU: 0.6244, mAP: 0.8073, mF1: 0.5160:  60%|██████    | 3/5 [00:02<00:01,  1.85it/s]pixAcc: 0.7844, mIoU: 0.6244, mAP: 0.8073, mF1: 0.5160:  80%|████████  | 4/5 [00:02<00:00,  2.05it/s]pixAcc: 0.7954, mIoU: 0.6354, mAP: 0.8247, mF1: 0.5446:  80%|████████  | 4/5 [00:02<00:00,  2.05it/s]pixAcc: 0.7954, mIoU: 0.6354, mAP: 0.8247, mF1: 0.5446: 100%|██████████| 5/5 [00:02<00:00,  2.18it/s]pixAcc: 0.7954, mIoU: 0.6354, mAP: 0.8247, mF1: 0.5446: 100%|██████████| 5/5 [00:02<00:00,  1.82it/s]
+image torch.Size([1, 3, 224, 224])
+lables torch.Size([1, 224, 224])
+image torch.Size([1, 3, 224, 224])
+lables torch.Size([1, 224, 224])
+image torch.Size([1, 3, 224, 224])
+lables torch.Size([1, 224, 224])
+image torch.Size([1, 3, 224, 224])
+lables torch.Size([1, 224, 224])
+image torch.Size([1, 3, 224, 224])
+lables torch.Size([1, 224, 224])
+Mean IoU over 2 classes: 0.6354
+
+Pixel-wise Accuracy: 79.54%
+
+Mean AP over 2 classes: 0.8247
+
+Mean F1 over 2 classes: 0.5446
+

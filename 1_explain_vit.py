@@ -9,27 +9,35 @@ Original file is located at
 ## Import Libraries
 """
 
+import sys
 import os
-import torch
-import datasets
-import timm
+import requests
 from PIL import Image
+from torchvision import transforms
 import numpy as np
 import matplotlib.pyplot as plt
+import torch
+import torch.nn as nn
+from torch.nn import functional as F
+import timm
+from timm.models.vision_transformer import VisionTransformer
+from timm.data import resolve_data_config
+from timm.data.transforms_factory import create_transform
+import datasets
 from collections import OrderedDict
-import torch.nn.functional as F
 import math
 import inspect
-import torch.nn as nn
 import re
 import cv2
 
 from imagenet_labels import CLS2IDX
 
-import sys
-sys.path.append("../transformer-explainability-chefer-implementation")
+# Add the path to the Chefer implementation
+sys.path.append("transformer-explainability-chefer-implementation")
 from baselines.ViT.ViT_LRP import vit_base_patch16_224 as vit_LRP
 from baselines.ViT.ViT_LRP import vit_base_patch14_reg4_dinov2
+from baselines.ViT.ViT_LRP import deit3_base_patch16_224
+from baselines.ViT.ViT_LRP import deit3_small_patch16_224
 from baselines.ViT.ViT_LRP import compute_rollout_attention as compute_rollout_attention_chefer
 
 # Set seed for reproducibility
@@ -51,7 +59,13 @@ results_dir = "results"
 # model_id = "vit_large_patch16_rope_224"
 # model_id = "vit_huge_patch16_224"
 
-model_id = "deit3_small_patch16_224.fb_in22k_ft_in1k"
+
+TARGET_CLASS = None  # if none use top-1 predicted class
+TARGET_CLASS = 282  
+
+# model_id = "deit3_small_patch16_224.fb_in22k_ft_in1k"
+model_id = "deit3_base_patch16_224.fb_in22k_ft_in1k"
+
 model_id_list = [
     "deit3_small_patch16_224.fb_in22k_ft_in1k",
     "deit3_base_patch16_224.fb_in22k_ft_in1k",
@@ -121,6 +135,12 @@ for name, param in model.named_parameters():
     if "reg" in name:
       print(name, param.shape)
 
+print("model architecture")
+print(model)
+
+# Write the modle architecture to a file
+with open(f"{results_dir}/model_architecture.txt", "w") as f:
+    f.write(str(model))
 
 HAS_REGISTERS = False
 NUMBER_OF_REGISTERS = 0
@@ -948,6 +968,10 @@ visualize_attention_overlay_simple(x, rollout_grid, alpha=0.6, interpolation='bi
 print("Initializing LRP model...")
 if model_id == "vit_base_patch14_reg4_dinov2.lvd142m":
     model_lrp = vit_base_patch14_reg4_dinov2(pretrained=False, img_size=518).to(device)
+elif model_id == "deit3_base_patch16_224.fb_in22k_ft_in1k":
+    model_lrp = deit3_base_patch16_224(pretrained=False).to(device)
+elif model_id == "deit3_small_patch16_224.fb_in22k_ft_in1k":
+    model_lrp = deit3_small_patch16_224(pretrained=False).to(device)
 else:
     model_lrp = vit_LRP(pretrained=False).to(device)
 model_lrp.eval()
@@ -988,7 +1012,7 @@ for key in lrp_state_dict.keys():
         print(f"Warning: Key {key} not found in timm model")
 
 # Load the transferred weights
-msg = model_lrp.load_state_dict(new_state_dict, strict=False)
+msg = model_lrp.load_state_dict(new_state_dict, strict=True)
 print("Weight transfer result:", msg)
 
 # Forward pass with LRP model
@@ -1002,9 +1026,10 @@ model_lrp.zero_grad()
 
 # You can change the target class here. 
 # By default, we use the predicted class, but you can set it to any class index (0-999).
-TARGET_CLASS = prediction # default
+if TARGET_CLASS == None:
+    TARGET_CLASS = prediction # default
 
-# TARGET_CLASS = 282 
+
 # TARGET_CLASS = 285 # Example: Force explanation for 'Egyptian cat'
 
 # We need to backpropagate the score of the target class
@@ -1031,17 +1056,5 @@ visualize_attention_overlay_simple(x, cam_lrp, alpha=0.6, interpolation='bilinea
 
 
 print("CheferCAM visualization saved.")
-
-
-
-
-
-
-
-
-
-
-
-
 
 

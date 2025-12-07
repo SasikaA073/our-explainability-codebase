@@ -1,0 +1,5 @@
+	243 : bull mastiff    		value = 7.576	 prob = 37.8%
+	242 : boxer           		value = 6.897	 prob = 19.2%
+	282 : tiger cat       		value = 6.107	 prob = 8.7%
+	281 : tabby, tabby cat		value = 5.981	 prob = 7.7%
+	245 : French bulldog  		value = 3.924	 prob = 1.0%

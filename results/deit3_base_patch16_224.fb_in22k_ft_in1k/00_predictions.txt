@@ -1,0 +1,5 @@
+	243 : bull mastiff    		value = 9.452	 prob = 73.2%
+	281 : tabby, tabby cat		value = 7.577	 prob = 11.2%
+	282 : tiger cat       		value = 7.200	 prob = 7.7%
+	242 : boxer           		value = 4.318	 prob = 0.4%
+	285 : Egyptian cat    		value = 4.275	 prob = 0.4%

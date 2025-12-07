@@ -1,0 +1,27 @@
+length of the dataset 5
+length of the dataloader 5
+batch size 1
+number of samples 5
+Evaluating vit-large with transformer_attribution method
+Using 5 samples
+Using imagenet/segmentation/gtsegs_ijcv.mat as the dataset
+Downloading: "https://github.com/rwightman/pytorch-image-models/releases/download/v0.1-vitjx/jx_vit_large_p16_224-4ee7a4dc.pth" to /home/dulanga/.cache/torch/hub/checkpoints/jx_vit_large_p16_224-4ee7a4dc.pth
+  0%|          | 0/5 [00:00<?, ?it/s]pixAcc: 0.6952, mIoU: 0.5169, mAP: 0.6780, mF1: 0.2778:   0%|          | 0/5 [00:01<?, ?it/s]pixAcc: 0.6952, mIoU: 0.5169, mAP: 0.6780, mF1: 0.2778:  20%|██        | 1/5 [00:01<00:05,  1.36s/it]pixAcc: 0.6739, mIoU: 0.4968, mAP: 0.6717, mF1: 0.4191:  20%|██        | 1/5 [00:01<00:05,  1.36s/it]pixAcc: 0.6739, mIoU: 0.4968, mAP: 0.6717, mF1: 0.4191:  40%|████      | 2/5 [00:01<00:02,  1.14it/s]pixAcc: 0.7126, mIoU: 0.5398, mAP: 0.7200, mF1: 0.4792:  40%|████      | 2/5 [00:02<00:02,  1.14it/s]pixAcc: 0.7126, mIoU: 0.5398, mAP: 0.7200, mF1: 0.4792:  60%|██████    | 3/5 [00:02<00:01,  1.31it/s]pixAcc: 0.6885, mIoU: 0.5044, mAP: 0.7351, mF1: 0.4301:  60%|██████    | 3/5 [00:03<00:01,  1.31it/s]pixAcc: 0.6885, mIoU: 0.5044, mAP: 0.7351, mF1: 0.4301:  80%|████████  | 4/5 [00:03<00:00,  1.40it/s]pixAcc: 0.7060, mIoU: 0.5217, mAP: 0.7620, mF1: 0.4519:  80%|████████  | 4/5 [00:03<00:00,  1.40it/s]pixAcc: 0.7060, mIoU: 0.5217, mAP: 0.7620, mF1: 0.4519: 100%|██████████| 5/5 [00:03<00:00,  1.47it/s]pixAcc: 0.7060, mIoU: 0.5217, mAP: 0.7620, mF1: 0.4519: 100%|██████████| 5/5 [00:03<00:00,  1.28it/s]
+image torch.Size([1, 3, 224, 224])
+lables torch.Size([1, 224, 224])
+image torch.Size([1, 3, 224, 224])
+lables torch.Size([1, 224, 224])
+image torch.Size([1, 3, 224, 224])
+lables torch.Size([1, 224, 224])
+image torch.Size([1, 3, 224, 224])
+lables torch.Size([1, 224, 224])
+image torch.Size([1, 3, 224, 224])
+lables torch.Size([1, 224, 224])
+Mean IoU over 2 classes: 0.5217
+
+Pixel-wise Accuracy: 70.60%
+
+Mean AP over 2 classes: 0.7620
+
+Mean F1 over 2 classes: 0.4519
+
