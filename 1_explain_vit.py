@@ -32,13 +32,13 @@ import cv2
 
 from imagenet_labels import CLS2IDX
 
-# Add the path to the Chefer implementation
-sys.path.append("transformer-explainability-chefer-implementation")
-from baselines.ViT.ViT_LRP import vit_base_patch16_224 as vit_LRP
-from baselines.ViT.ViT_LRP import vit_base_patch14_reg4_dinov2
-from baselines.ViT.ViT_LRP import deit3_base_patch16_224
-from baselines.ViT.ViT_LRP import deit3_small_patch16_224
-from baselines.ViT.ViT_LRP import compute_rollout_attention as compute_rollout_attention_chefer
+from chefer_explain.baselines.ViT.ViT_LRP import vit_base_patch16_224 as vit_LRP
+from chefer_explain.baselines.ViT.ViT_LRP import vit_base_patch14_reg4_dinov2
+from chefer_explain.baselines.ViT.ViT_LRP import deit3_base_patch16_224
+from chefer_explain.baselines.ViT.ViT_LRP import deit3_small_patch16_224
+# from baselines.ViT.ViT_LRP import deit3_medium_patch16_224
+# from baselines.ViT.ViT_LRP import deit3_large_patch16_224
+from chefer_explain.baselines.ViT.ViT_LRP import compute_rollout_attention as compute_rollout_attention_chefer
 
 # Set seed for reproducibility
 torch.manual_seed(0)
@@ -52,8 +52,8 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 device = "cpu"
 
 results_dir = "results"
-# model_id = "vit_base_patch14_reg4_dinov2.lvd142m"
-# model_id = "vit_base_patch16_224.augreg2_in21k_ft_in1k"
+# model_id = 
+
 
 # model_id = "vit_large_patch14_224"
 # model_id = "vit_large_patch16_rope_224"
@@ -61,14 +61,15 @@ results_dir = "results"
 
 
 TARGET_CLASS = None  # if none use top-1 predicted class
-TARGET_CLASS = 282  
+# TARGET_CLASS = 282  
 
 # model_id = "deit3_small_patch16_224.fb_in22k_ft_in1k"
-model_id = "deit3_base_patch16_224.fb_in22k_ft_in1k"
+# model_id = "deit3_base_patch16_224.fb_in22k_ft_in1k"
+# model_id = "deit3_medium_patch16_224.fb_in22k_ft_in1k"
 
 model_id_list = [
-    "deit3_small_patch16_224.fb_in22k_ft_in1k",
-    "deit3_base_patch16_224.fb_in22k_ft_in1k",
+    "deit3_small_patch16_224.fb_in22k_ft_in1k", # done
+    "deit3_base_patch16_224.fb_in22k_ft_in1k", # done
     "deit3_medium_patch16_224.fb_in22k_ft_in1k",
     "deit3_large_patch16_224.fb_in22k_ft_in1k",
 
@@ -77,6 +78,15 @@ model_id_list = [
     "deit3_base_patch16_384.fb_in22k_ft_in1k"
 
 ]
+
+model_id_dict = {
+    "vit_base_pattch16_224.augreg2_in21k_ft_in1k":{
+        "extra_tokens": 1, # CLS token
+    },
+    "vit_base_patch14_reg4_dinov2.lvd142m":{
+        "extra_tokens": 5, # 1 CLS + 4 registers + 1369 patches
+    }
+}
 
 results_dir = f"{results_dir}/{model_id}"
 os.makedirs(results_dir, exist_ok=True)
@@ -962,9 +972,6 @@ visualize_attention_overlay_simple(x, rollout_grid, alpha=0.6, interpolation='bi
 ## TODO: CheferCAM (Transformer Atribution/Grad) Explainability Map (I want to show this one)
 
 
-
-# ... (existing code)
-
 print("Initializing LRP model...")
 if model_id == "vit_base_patch14_reg4_dinov2.lvd142m":
     model_lrp = vit_base_patch14_reg4_dinov2(pretrained=False, img_size=518).to(device)
@@ -973,6 +980,7 @@ elif model_id == "deit3_base_patch16_224.fb_in22k_ft_in1k":
 elif model_id == "deit3_small_patch16_224.fb_in22k_ft_in1k":
     model_lrp = deit3_small_patch16_224(pretrained=False).to(device)
 else:
+    print(f"[DEBUG]Initializing LRP model for {model_id}")
     model_lrp = vit_LRP(pretrained=False).to(device)
 model_lrp.eval()
 
@@ -983,6 +991,8 @@ timm_state_dict = model.state_dict()
 lrp_state_dict = model_lrp.state_dict()
 if 'pos_embed' in lrp_state_dict:
     print(f"lrp pos_embed shape: {lrp_state_dict['pos_embed'].shape}")
+
+
 
 new_state_dict = {}
 for key in lrp_state_dict.keys():
@@ -1000,6 +1010,8 @@ for key in lrp_state_dict.keys():
             
             # Copy patches (last 1369 elements)
             # indices: 0=CLS, 1..4=REG, 5..=PATCHES
+
+            
             num_extra_tokens = 1 + (4 if model_id == "vit_base_patch14_reg4_dinov2.lvd142m" else 0)
             new_pos_embed[:, num_extra_tokens:, :] = timm_state_dict[key]
             new_state_dict[key] = new_pos_embed

@@ -1,0 +1,528 @@
+cls_token torch.Size([1, 1, 768])
+model architecture
+VisionTransformer(
+  (patch_embed): PatchEmbed(
+    (proj): Conv2d(3, 768, kernel_size=(16, 16), stride=(16, 16))
+    (norm): Identity()
+  )
+  (pos_drop): Dropout(p=0.0, inplace=False)
+  (patch_drop): Identity()
+  (norm_pre): Identity()
+  (blocks): Sequential(
+    (0): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (1): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (2): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (3): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (4): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (5): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (6): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (7): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (8): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (9): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (10): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (11): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+  )
+  (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+  (fc_norm): Identity()
+  (head_drop): Dropout(p=0.0, inplace=False)
+  (head): Linear(in_features=768, out_features=1000, bias=True)
+)
+HAS_REGISTERS=False
+NUMBER_OF_REGISTERS=0
+block_0
+	q shape torch.Size([1, 12, 197, 64])
+	k shape torch.Size([1, 12, 197, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 197, 197])
+	Attention Map shape after softmax torch.Size([1, 12, 197, 197])
+block_1
+	q shape torch.Size([1, 12, 197, 64])
+	k shape torch.Size([1, 12, 197, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 197, 197])
+	Attention Map shape after softmax torch.Size([1, 12, 197, 197])
+block_2
+	q shape torch.Size([1, 12, 197, 64])
+	k shape torch.Size([1, 12, 197, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 197, 197])
+	Attention Map shape after softmax torch.Size([1, 12, 197, 197])
+block_3
+	q shape torch.Size([1, 12, 197, 64])
+	k shape torch.Size([1, 12, 197, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 197, 197])
+	Attention Map shape after softmax torch.Size([1, 12, 197, 197])
+block_4
+	q shape torch.Size([1, 12, 197, 64])
+	k shape torch.Size([1, 12, 197, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 197, 197])
+	Attention Map shape after softmax torch.Size([1, 12, 197, 197])
+block_5
+	q shape torch.Size([1, 12, 197, 64])
+	k shape torch.Size([1, 12, 197, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 197, 197])
+	Attention Map shape after softmax torch.Size([1, 12, 197, 197])
+block_6
+	q shape torch.Size([1, 12, 197, 64])
+	k shape torch.Size([1, 12, 197, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 197, 197])
+	Attention Map shape after softmax torch.Size([1, 12, 197, 197])
+block_7
+	q shape torch.Size([1, 12, 197, 64])
+	k shape torch.Size([1, 12, 197, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 197, 197])
+	Attention Map shape after softmax torch.Size([1, 12, 197, 197])
+block_8
+	q shape torch.Size([1, 12, 197, 64])
+	k shape torch.Size([1, 12, 197, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 197, 197])
+	Attention Map shape after softmax torch.Size([1, 12, 197, 197])
+block_9
+	q shape torch.Size([1, 12, 197, 64])
+	k shape torch.Size([1, 12, 197, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 197, 197])
+	Attention Map shape after softmax torch.Size([1, 12, 197, 197])
+block_10
+	q shape torch.Size([1, 12, 197, 64])
+	k shape torch.Size([1, 12, 197, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 197, 197])
+	Attention Map shape after softmax torch.Size([1, 12, 197, 197])
+block_11
+	q shape torch.Size([1, 12, 197, 64])
+	k shape torch.Size([1, 12, 197, 64])
+	Attention Map shape before softmax torch.Size([1, 12, 197, 197])
+	Attention Map shape after softmax torch.Size([1, 12, 197, 197])
+Top 5 classes:
+	243 : bull mastiff    		value = 7.648	 prob = 34.4%
+	242 : boxer           		value = 6.999	 prob = 18.0%
+	282 : tiger cat       		value = 6.623	 prob = 12.4%
+	281 : tabby, tabby cat		value = 6.324	 prob = 9.2%
+	285 : Egyptian cat    		value = 5.134	 prob = 2.8%
+=== INPUT CHECK ===
+shape: torch.Size([1, 3, 224, 224])
+dtype: torch.float32
+min / max / mean: -0.9372549057006836 1.0 -0.08770136535167694
+contains NaNs: False
+
+=== MODEL PREDICTIONS CHECK ===
+predictions shape: torch.Size([1, 1000])
+predictions contains NaNs: False
+softmax sum: 0.9999998807907104
+
+=== TOP-5 PREDICTIONS ===
+Top 5 classes:
+Top 5 classes:
+243 : bull mastiff    		value = 7.648	 prob = 34.4%
+242 : boxer           		value = 6.999	 prob = 18.0%
+282 : tiger cat       		value = 6.623	 prob = 12.4%
+281 : tabby, tabby cat		value = 6.324	 prob = 9.2%
+285 : Egyptian cat    		value = 5.134	 prob = 2.8%
+
+=== VISUALIZATION ===
+Input shape: torch.Size([1, 3, 224, 224])
+
+block_0:
+  Mean: -0.0288
+  Std:  0.0110
+  Min:  -0.0704
+  Max:  -0.0031
+  Range: 0.0673
+
+block_1:
+  Mean: -0.0493
+  Std:  0.0107
+  Min:  -0.0867
+  Max:  -0.0237
+  Range: 0.0630
+
+block_2:
+  Mean: -0.0628
+  Std:  0.0107
+  Min:  -0.0996
+  Max:  -0.0362
+  Range: 0.0634
+
+block_3:
+  Mean: -0.0757
+  Std:  0.0114
+  Min:  -0.1133
+  Max:  -0.0480
+  Range: 0.0653
+
+block_4:
+  Mean: -0.0892
+  Std:  0.0121
+  Min:  -0.1300
+  Max:  -0.0590
+  Range: 0.0710
+
+block_5:
+  Mean: -0.1028
+  Std:  0.0126
+  Min:  -0.1473
+  Max:  -0.0734
+  Range: 0.0739
+
+block_6:
+  Mean: -0.1148
+  Std:  0.0115
+  Min:  -0.1602
+  Max:  -0.0886
+  Range: 0.0716
+
+block_7:
+  Mean: -0.1320
+  Std:  0.0116
+  Min:  -0.1778
+  Max:  -0.0962
+  Range: 0.0816
+
+block_8:
+  Mean: -0.1531
+  Std:  0.0128
+  Min:  -0.1997
+  Max:  -0.1043
+  Range: 0.0954
+
+block_9:
+  Mean: -0.1700
+  Std:  0.0143
+  Min:  -0.2177
+  Max:  -0.1122
+  Range: 0.1055
+
+block_10:
+  Mean: -0.1556
+  Std:  0.0159
+  Min:  -0.1979
+  Max:  -0.0971
+  Range: 0.1007
+
+block_11:
+  Mean: -0.1226
+  Std:  0.0168
+  Min:  -0.1724
+  Max:  -0.0455
+  Range: 0.1269
+block_0 torch.Size([1, 12, 197, 197])
+block_1 torch.Size([1, 12, 197, 197])
+block_2 torch.Size([1, 12, 197, 197])
+block_3 torch.Size([1, 12, 197, 197])
+block_4 torch.Size([1, 12, 197, 197])
+block_5 torch.Size([1, 12, 197, 197])
+block_6 torch.Size([1, 12, 197, 197])
+block_7 torch.Size([1, 12, 197, 197])
+block_8 torch.Size([1, 12, 197, 197])
+block_9 torch.Size([1, 12, 197, 197])
+block_10 torch.Size([1, 12, 197, 197])
+block_11 torch.Size([1, 12, 197, 197])
+Attention shape: torch.Size([14, 14])
+Min: 0.0051
+Max: 0.0051
+Mean: 0.0051
+Sum: 1.0000
+torch.Size([1, 1, 14, 14])
+torch.Size([1, 1, 14, 14])
+torch.Size([1, 1, 14, 14])
+torch.Size([1, 1, 14, 14])
+torch.Size([1, 1, 14, 14])
+torch.Size([1, 1, 14, 14])
+torch.Size([1, 1, 14, 14])
+torch.Size([1, 1, 14, 14])
+torch.Size([1, 1, 14, 14])
+torch.Size([1, 1, 14, 14])
+torch.Size([1, 1, 14, 14])
+torch.Size([1, 1, 14, 14])
+Initializing LRP model...
+[DEBUG]Initializing LRP model for vit_base_patch16_224.augreg2_in21k_ft_in1k
+Transferring weights...
+lrp pos_embed shape: torch.Size([1, 197, 768])
+Weight transfer result: <All keys matched successfully>
+Running CheferCAM...
+Prediction: bull mastiff
+CheferCAM visualization saved.
