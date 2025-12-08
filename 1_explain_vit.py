@@ -1023,7 +1023,7 @@ for key in lrp_state_dict.keys():
         # But let's check for 'patch_embed.proj.weight' vs 'patch_embed.proj.weight'
         print(f"Warning: Key {key} not found in timm model")
 
-# Load the transferred weights
+# Load the transferred weightsx``
 msg = model_lrp.load_state_dict(new_state_dict, strict=True)
 print("Weight transfer result:", msg)
 
